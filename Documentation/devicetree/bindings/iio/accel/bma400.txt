@@ -1,0 +1,16 @@
+
+* Bosch BMA400 triaxial acceleration sensor
+
+https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BMA400-DS000.pdf
+
+Required properties:
+
+  - compatible : should be "bosch,bma400"
+  - reg : the I2C address of the sensor
+
+Example:
+
+bma400@14 {
+	compatible = "bosch,bma400";
+	reg = <0x14>;
+};

@@ -1,15 +1,13 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
- * bma400-i2c.c - I2C IIO driver for Bosch BMA400 triaxial acceleration sensor.
+ * bma400_i2c.c - I2C IIO driver for Bosch BMA400 triaxial acceleration sensor.
  *
  * Copyright 2019 Dan Robertson <dan@dlrobertson.com>
  *
  * I2C address is either 0x14 or 0x15 depending on SDO
- *
  */
-#include <linux/module.h>
 #include <linux/i2c.h>
-#include <linux/acpi.h>
+#include <linux/module.h>
 #include <linux/of.h>
 #include <linux/regmap.h>
 
@@ -35,12 +33,18 @@ static const struct i2c_device_id bma400_i2c_ids[] = {
 	{ "bma400", 0 },
 	{ }
 };
-
 MODULE_DEVICE_TABLE(i2c, bma400_i2c_ids);
+
+static const struct of_device_id bma400_of_match[] = {
+	{ .compatible = "bosch,bma400" },
+	{ }
+};
+MODULE_DEVICE_TABLE(of, bma400_of_match);
 
 static struct i2c_driver bma400_i2c_driver = {
 	.driver = {
 		.name = "bma400",
+		.of_match_table = bma400_of_match,
 	},
 	.probe    = bma400_i2c_probe,
 	.remove   = bma400_i2c_remove,

@@ -4,7 +4,6 @@
  *            needed by the bma400 sources.
  *
  * Copyright 2019 Dan Robertson <dan@dlrobertson.com>
- *
  */
 
 #include <linux/regmap.h>
@@ -26,7 +25,7 @@
 #define BMA400_Z_AXIS_LSB_REG   0x08
 #define BMA400_Z_AXIS_MSB_REG   0x09
 
-/* Sensort time registers */
+/* Sensor time registers */
 #define BMA400_SENSOR_TIME0     0x0a
 #define BMA400_SENSOR_TIME1     0x0b
 #define BMA400_SENSOR_TIME2     0x0c
@@ -64,6 +63,13 @@
 
 /* The softreset command */
 #define BMA400_SOFTRESET_CMD    0xb6
+
+#define BMA400_TWO_BITS_MASK    0x03
+#define BMA400_LP_OSR_MASK      0x60
+#define BMA400_NP_OSR_MASK      0x30
+#define BMA400_CMD_RDY_MASK     0x10
+#define BMA400_ACC_ODR_MASK     0x0f
+#define BMA400_ACC_RANGE_MASK   0xc0
 
 extern const struct regmap_config bma400_regmap_config;
 

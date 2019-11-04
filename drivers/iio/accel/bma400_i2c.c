@@ -20,8 +20,8 @@ static int bma400_i2c_probe(struct i2c_client *client,
 
 	regmap = devm_regmap_init_i2c(client, &bma400_regmap_config);
 
-	if (!regmap)
-		return -ENOMEM;
+	if (IS_ERR(regmap))
+		return PTR_ERR(regmap);
 
 	return bma400_probe(&client->dev, regmap, id->name);
 }

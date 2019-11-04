@@ -547,13 +547,22 @@ static int bma400_init(struct bma400_data *data)
 	unsigned int val;
 	int ret;
 
+	printk("[bma400] %p\n", data);
+
+	if (!data)
+		return -ENOMEM;
+
+	printk("[bma400] regmap=%p\n", data->regmap);
+	printk("[bma400] regmap->reg_stride=%p\n", data->regmap->reg_stride);
+
 	/* Try to read chip_id register. It must return 0x90. */
 	ret = regmap_read(data->regmap, BMA400_CHIP_ID_REG, &val);
-
 	if (ret < 0) {
 		dev_err(data->dev, "Failed to read chip id register\n");
 		return ret;
 	}
+
+	printk("[bma400] chip id=%x\n", val);
 	if (val != BMA400_ID_REG_VAL) {
 		dev_err(data->dev, "Chip ID mismatch\n");
 		return -ENODEV;
